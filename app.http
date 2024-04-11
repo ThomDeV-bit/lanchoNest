@@ -1,2 +1,22 @@
 ####
-GET http://localhost:3000/Pedidos
+GET http://localhost:3000/Pedido
+
+
+###
+POST http://localhost:3000/Pedidos/criar
+Content-Type: application/json
+
+{
+    "preco": 50,
+    "descricao": "1 x-tudo",
+    "clienteId": 1
+}
+
+###
+POST http://localhost:3000/criarCliente
+Content-Type: application/json
+{
+    "nome":"thomaz",
+    "numero":"6599887617",
+    "email":"tjosetti24@gmail.com"
+}
