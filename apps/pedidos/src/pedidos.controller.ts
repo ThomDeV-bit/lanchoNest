@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { PedidosService } from './pedidos.service';
-import { PedidosDTO } from './dto/pedido.dto';
 import { ClienteDTO } from './dto/cliente.dto';
+import { PedidosDTO } from './dto/pedido.dto';
+
 
 @Controller('Pedido')
 export class PedidosController {
@@ -13,18 +14,13 @@ export class PedidosController {
     return await this.pedidosService.buscarPedidos();
   }
 
-  @Get('')
-  async listarCliente() {
-    console.log('ooi')
-    return await this.pedidosService.buscarPedidos();
-  }
 
-  @Post('criarCliente')
+  @Post('Cliente')
   async criarCliente(@Body() data: ClienteDTO) {
     return await this.pedidosService.criarCliente(data)
   }
 
-  @Post('criar')
+  @Post('criarPedido')
   async criar(@Body() data: PedidosDTO) {
     return await this.pedidosService.criarPedido(data)
   }
