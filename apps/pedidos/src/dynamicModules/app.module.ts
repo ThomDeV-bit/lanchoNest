@@ -9,19 +9,9 @@ export class AppModule {
 	static register(): DynamicModule {
 		return {
 			module: AppModule,
+			global: true,
 			imports: [
-				ClientsModule.register([
-					{
-						name: 'SERVIÇO_DE_PEDIDOS',
-						transport: Transport.KAFKA,
-						options: {
-							client: {
-								clientId: 'pedidos',
-								brokers: ['kafka:29092'],
-							},
-						}
-					},
-				]),
+
 				TypeormModule.register(),
 				ApiModule.register({ serviceModule: ServiceModule.register() })
 			]
