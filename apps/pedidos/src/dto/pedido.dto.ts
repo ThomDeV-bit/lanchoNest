@@ -5,8 +5,8 @@ export class PedidosDTO {
 	nome: string
 	preco: number
 	descricao: string
-	createAt: Date
-	updatedAt: Date
+	createAt?: Date
+	updatedAt?: Date
 	clienteId: ClienteEntity
 	status: StatusPedido
 

@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryColumn, PrimaryGeneratedColumn, Timestamp } from "typeorm";
 import { StatusPedido } from "../../enum";
 import { ClienteEntity } from "./cliente.entity";
 
@@ -19,11 +19,11 @@ export class PedidosEntities {
 	descricao: string
 
 
-	@Column({ name: 'createAt', type: 'datetime', nullable: false })
-	createAt: Date
+	@CreateDateColumn({ name: 'createAt', type: 'datetime', nullable: false })
+	createAt: Timestamp
 
-	@Column({ name: 'updatedAt', type: 'datetime', nullable: false })
-	updatedAt: Date
+	@CreateDateColumn({ name: 'updatedAt', type: 'datetime', nullable: false })
+	updatedAt: Timestamp
 
 	@Column({ name: 'status', type: 'enum', enum: StatusPedido })
 	status: StatusPedido
