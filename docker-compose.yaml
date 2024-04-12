@@ -12,7 +12,7 @@ services:
     volumes:
       - .:/home/node/app
     networks:
-      - myLanchonet
+      - myLanchonete
 
   zookeeper:
     image: confluentinc/cp-zookeeper:7.5.0
@@ -85,11 +85,10 @@ services:
       - 3310
       - 3306
     networks:
-      - myLanchonet
+      - myLanchonete
     volumes:
-      - ./.docker/mysql:/docker-entrypoint.initdb.d
-
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 networks:
-  myLanchonet:
-    name: myLanchonet
+  myLanchonete:
+    name: myLanchonete
     driver: bridge
