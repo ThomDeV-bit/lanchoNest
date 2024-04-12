@@ -1,12 +1,13 @@
+import { ClienteEntity } from "../database/entities/cliente.entity"
 import { StatusPedido } from "../enum"
-import { Prisma } from '.prisma/client/PEDIDOS'
-export class PedidosDTO implements Prisma.PedidosUncheckedCreateInput {
+export class PedidosDTO {
+	id: number
 	nome: string
 	preco: number
 	descricao: string
 	createAt: Date
 	updatedAt: Date
-	clienteId: number
+	clienteId: ClienteEntity
 	status: StatusPedido
 
 }
