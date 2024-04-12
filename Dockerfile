@@ -2,10 +2,12 @@ FROM node:latest
 
 WORKDIR /home/node/app
 
-USER node
+COPY . .
+
+RUN npm install --quiet --no-optional --no-found --loglevel=error
 
 EXPOSE 3000
 EXPOSE 3310
 EXPOSE 3306
 
-CMD [ "tail","-f","/dev/null" ]
+CMD ["npm","run","start:prod"]

@@ -10,14 +10,23 @@
   "monorepo": true,
   "root": "apps/pedidos",
   "projects": {
-    },
-    "pedidos": {
+    "pagamentos": {
       "type": "application",
-      "root": "apps/pedidos",
+      "root": "apps/pagamentos",
       "entryFile": "main",
-      "sourceRoot": "apps/pedidos/src",
+      "sourceRoot": "apps/pagamentos/src",
       "compilerOptions": {
-        "tsConfigPath": "apps/pedidos/tsconfig.app.json"
+        "tsConfigPath": "apps/pagamentos/tsconfig.app.json"
       }
     }
+  },
+  "pedidos": {
+    "type": "application",
+    "root": "apps/pedidos",
+    "entryFile": "main",
+    "sourceRoot": "apps/pedidos/src",
+    "compilerOptions": {
+      "tsConfigPath": "apps/pedidos/tsconfig.app.json"
+    }
   }
+}
