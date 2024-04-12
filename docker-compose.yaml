@@ -23,6 +23,8 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
       ZOOKEEPER_TICK_TIME: 2000
+    networks:
+      - myLanchonete
 
   kafka:
     image: confluentinc/cp-server:7.5.0
@@ -52,7 +54,8 @@ services:
       CONFLUENT_METRICS_REPORTER_TOPIC_REPLICAS: 1
       CONFLUENT_METRICS_ENABLE: 'true'
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
-
+    networks:
+      - myLanchonete
   control-center:
     image: confluentinc/cp-enterprise-control-center:7.5.0
     hostname: control-center
@@ -72,6 +75,8 @@ services:
       CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
       CONFLUENT_METRICS_TOPIC_REPLICATION: 1
       PORT: 9021
+    networks:
+      - myLanchonete
 
   mysql:
     image: mysql:latest
