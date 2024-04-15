@@ -17,22 +17,26 @@ export class PedidosRepository {
 		private readonly ClienteRepository: Repository<ClienteEntity>
 	) { }
 	async listar() {
-		return await this.pedidosRepository.find()
+		return await this.ClienteRepository.find({
+			relations: {
+				pedidos: true
+			}
+		})
 	}
 
 	async criarPedido(pedido: PedidosDTO) {
 		pedido.createAt = new Date()
 		pedido.updatedAt = new Date()
-		const cliente = await this.ClienteRepository.findOne({
-			where: {
-				id: pedido.clienteId.id
-			}
-		})
+		console.log(pedido.clienteId)
+		const cliente = await this.ClienteRepository.createQueryBuilder()
+			.select()
+			.where(`id = ${pedido.clienteId}`)
+			.getOne()
 		if (!cliente) throw new NotFoundException('Cliente nao consta na base de dados')
+		console.log(cliente)
 		const pedidos = this.pedidosRepository.create({
 			...pedido,
-
-			nome: cliente.nome
+			nome: cliente?.nome
 		})
 		return await this.pedidosRepository.save(pedidos)
 	}

@@ -10,8 +10,13 @@ export class PedidosController {
 
   @Get('')
   async getHello() {
-    console.log('ooi')
-    return await this.pedidosService.buscarPedidos();
+    try {
+      console.log('ooi')
+      return await this.pedidosService.buscarPedidos();
+    } catch (error) {
+      console.log(console.error(error))
+    }
+
   }
 
 
