@@ -1,7 +1,7 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PedidosEntities } from "./entities/pedidos.entity";
 import { ClienteEntity } from "./entities/cliente.entity";
-import { Migrations1712948440267 } from "./1712948440267-migrations";
+import { Migrations1712948440267 } from "./migrations/1712948440267-migrations";
 
 export const database: DataSourceOptions = {
 	type: 'mysql',
