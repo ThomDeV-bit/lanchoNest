@@ -1,10 +1,24 @@
 import { Module } from '@nestjs/common';
 import { PagamentosController } from './payments.controller';
 import { PaymentsService } from './payments.service';
-import { DatabaseModule } from './database/database.config';
+import { TypeormModule } from './database/database.module';
+import { ClientsModule, Transport } from '@nestjs/microservices';
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [TypeormModule.register(),
+  ClientsModule.register([
+    {
+      name: 'PAYMENTS_SERVICE',
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          clientId: 'pagamentos',
+          brokers: ['broker:29092'],
+        },
+      }
+    },
+  ])
+  ],
   controllers: [PagamentosController],
   providers: [PaymentsService],
 })
