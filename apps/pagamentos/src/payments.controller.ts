@@ -13,14 +13,22 @@ export class PagamentosController {
     return this.paymentsService.list();
   }
 
-  @EventPattern('pedidos')
+  @EventPattern('order')
   async payment(@Payload() message) {
-    await this.paymentsService.validPayment({
-      amount: message.pedidos.price,
-      clientId: message.pedidos.clientId,
-      orderId: message.pedidos.id,
+    console.log(message)
+    await this.paymentsService.validOrder({
+      amount: message.orders.price,
+      clientId: message.orders.clientId,
+      orderId: message.orders.id,
       createdAt: new Date,
-      status: PaymentStatus.APROVED
+      status: PaymentStatus.PENDING,
+      email: message.orders.email
     })
+  }
+
+  @EventPattern('transaction')
+  async validPayment(@Payload() message) {
+    console.log(message)
+    await this.paymentsService.validPayments(message)
   }
 }

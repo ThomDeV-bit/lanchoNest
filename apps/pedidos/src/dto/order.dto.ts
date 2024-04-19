@@ -3,9 +3,10 @@ import { OrderStatus } from "../enum/enum"
 
 export class OrdersDTO {
 	id: number
-	name:string
-	price : number
-	description :string
+	name: string
+	email: string
+	price: number
+	description: string
 	createAt?: Date
 	updatedAt?: Date
 	clientId: ClientEntity

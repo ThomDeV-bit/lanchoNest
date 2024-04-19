@@ -1,4 +1,4 @@
-import { OrdersEntity } from "../database/entities/pedidos.entity"
+import { OrdersEntity } from "../database/entities/order.entity"
 
 export class ClientDTO {
 	name: string

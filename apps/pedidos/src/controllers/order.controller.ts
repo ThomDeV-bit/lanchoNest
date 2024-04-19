@@ -1,7 +1,8 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { ClientDTO } from '../dto/client.dto';
-import { OrdersService } from '../services/pedidos.service';
+import { OrdersService } from '../services/order.service';
 import { OrdersDTO } from '../dto/order.dto';
+import { MessagePattern, Payload } from '@nestjs/microservices';
 
 
 @Controller('Pedido')
@@ -27,4 +28,10 @@ export class OrdersController {
   async createOrder(@Body() data: OrdersDTO) {
     return await this.orderService.createOrder(data)
   }
+
+  @MessagePattern('payments')
+  async updateOrderStatus(@Payload() message) {
+    await this.orderService.updateOrder(message)
+  }
+
 }

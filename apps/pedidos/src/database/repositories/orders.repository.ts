@@ -1,11 +1,13 @@
 import { BadRequestException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { OrdersEntity } from "../entities/pedidos.entity";
+import { OrdersEntity } from "../entities/order.entity";
 import { Repository } from "typeorm";
 import { OrdersDTO } from "../../dto/order.dto";
 import { ClientDTO } from "../../dto/client.dto";
 import { NotFoundError, throwError } from "rxjs";
 import { ClientEntity } from "../entities/client.entity";
+import { emit } from "process";
+import { OrderStatus } from "../../enum/enum";
 
 @Injectable()
 
@@ -40,7 +42,8 @@ export class OrdersRepository {
 			if (!cliente) throw new NotFoundException('Cliente nao consta na base de dados')
 			const pedidos = this.orderRepository.create({
 				...pedido,
-				name: cliente?.name
+				name: cliente?.name,
+				email: cliente?.email
 			})
 			return await this.orderRepository.save(pedidos)
 		} catch (error) {
@@ -53,5 +56,11 @@ export class OrdersRepository {
 	async criarCliente(cliente: ClientDTO) {
 		const criarCliente = this.clientRepository.create(cliente)
 		return await this.clientRepository.save(criarCliente)
+	}
+
+	async update(message: any) {
+		const query = this.orderRepository.createQueryBuilder()
+		query.update().set({ status: message.payments.status === 'APROVED' ? OrderStatus.PAYED : OrderStatus.CANCELLED })
+		return query.execute()
 	}
 }

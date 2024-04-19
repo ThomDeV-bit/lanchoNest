@@ -18,6 +18,15 @@
       "compilerOptions": {
         "tsConfigPath": "apps/pagamentos/tsconfig.app.json"
       }
+    },
+    "financeira": {
+      "type": "application",
+      "root": "apps/financeira",
+      "entryFile": "main",
+      "sourceRoot": "apps/financeira/src",
+      "compilerOptions": {
+        "tsConfigPath": "apps/financeira/tsconfig.app.json"
+      }
     }
   },
   "pedidos": {

@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { OrdersEntity } from "./pedidos.entity";
+import { OrdersEntity } from "./order.entity";
 
 @Entity()
 export class ClientEntity {
@@ -12,11 +12,9 @@ export class ClientEntity {
 	@Column({ name: 'number', type: 'varchar', nullable: false, unique: true })
 	number: string
 
-
 	@Column({ name: 'email', type: 'varchar', nullable: false, unique: true })
 	email: string
 
 	@OneToMany(() => OrdersEntity, (orders) => orders.clientId)
 	orders: OrdersEntity[]
-
 }

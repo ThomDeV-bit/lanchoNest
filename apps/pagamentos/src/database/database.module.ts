@@ -11,8 +11,6 @@ export class TypeormModule {
 	static register(): DynamicModule {
 		const entitiesSchema = [
 			PaymentsEntity,
-			
-
 		];
 		const config = database;
 		return {

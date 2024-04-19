@@ -1,6 +1,6 @@
 import { DataSource, DataSourceOptions } from "typeorm";
 import { PaymentsEntity } from "./entities/pagamentos.entity";
-import { Migrations1713535497187 } from "./1713535497187-migrations";
+import { Migrations1713553283213 } from "./1713553283213-migrations";
 
 
 export const database: DataSourceOptions = {
@@ -11,7 +11,7 @@ export const database: DataSourceOptions = {
 	password: 'root123',
 	database: 'PAGAMENTOS',
 	entities: [PaymentsEntity],
-	migrations: [Migrations1713535497187]
+	migrations: [Migrations1713553283213]
 }
 
 const databaseProvider = new DataSource(database)

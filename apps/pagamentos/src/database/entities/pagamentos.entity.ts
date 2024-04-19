@@ -10,6 +10,9 @@ export class PaymentsEntity {
 	@Column({ name: 'amount', type: 'int' })
 	amount: number
 
+	@Column({ name: 'email', type: 'varchar' })
+	email: string
+
 	@Column({ name: 'clientId', type: 'int' })
 	clientId: number
 

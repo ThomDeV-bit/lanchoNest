@@ -1,6 +1,6 @@
 import { DynamicModule, Module } from "@nestjs/common";
 import { ClientsModule, Transport } from "@nestjs/microservices";
-import { OrdersService } from "../services/pedidos.service";
+import { OrdersService } from "../services/order.service";
 
 @Module({})
 export class ServiceModule {
@@ -17,7 +17,17 @@ export class ServiceModule {
 						transport: Transport.KAFKA,
 						options: {
 							client: {
-								clientId: 'pedidos',
+								clientId: 'order',
+								brokers: ['broker:29092'],
+							},
+						}
+					},
+					{
+						name: 'USER_SERVICE',
+						transport: Transport.KAFKA,
+						options: {
+							client: {
+								clientId: 'create_user',
 								brokers: ['broker:29092'],
 							},
 						}

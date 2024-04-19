@@ -15,6 +15,9 @@ export class OrdersEntity {
 	@Column({ name: 'price', type: 'int', nullable: false })
 	price: number
 
+	@Column({ name: 'email', type: 'varchar' })
+	email: string
+
 	@Column({ name: 'description', type: 'varchar', nullable: false })
 	description: string
 
