@@ -13,12 +13,12 @@ export class ServiceModule {
 			imports: [
 				ClientsModule.register([
 					{
-						name: 'SERVIÇO_DE_PEDIDOS',
+						name: 'ORDER_SERVICE',
 						transport: Transport.KAFKA,
 						options: {
 							client: {
 								clientId: 'pedidos',
-								brokers: ['kafka:29092'],
+								brokers: ['broker:29092'],
 							},
 						}
 					},

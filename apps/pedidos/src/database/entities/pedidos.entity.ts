@@ -12,8 +12,8 @@ export class OrdersEntity {
 	@Column({ name: 'name', type: 'varchar', length: 100, nullable: false })
 	name: string
 
-	@Column({ name: 'preco', type: 'int', nullable: false })
-	preco: number
+	@Column({ name: 'price', type: 'int', nullable: false })
+	price: number
 
 	@Column({ name: 'description', type: 'varchar', nullable: false })
 	description: string

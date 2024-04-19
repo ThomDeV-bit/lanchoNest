@@ -1,16 +1,17 @@
 import { Module, DynamicModule } from "@nestjs/common";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { database } from "../database/database.config";
-import { ClienteEntity } from "../database/entities/cliente.entity";
-import { PedidosEntities } from "../database/entities/pedidos.entity";
-import { PedidosRepository } from "../database/repositories/orders.repository";
+import { OrdersEntity } from "../database/entities/pedidos.entity";
+import { ClientEntity } from "../database/entities/client.entity";
+import { OrdersRepository } from "../database/repositories/orders.repository";
+
 
 @Module({})
 export class TypeormModule {
 	static register(): DynamicModule {
 		const entitiesSchema = [
-			PedidosEntities,
-			ClienteEntity
+			OrdersEntity,
+			ClientEntity
 
 		];
 		const config = database;
@@ -29,11 +30,11 @@ export class TypeormModule {
 				})
 			],
 			exports: [
-				PedidosRepository,
+				OrdersRepository,
 
 			],
 			providers: [
-				PedidosRepository
+				OrdersRepository
 			]
 
 		}

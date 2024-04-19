@@ -23,7 +23,7 @@ export class OrdersController {
     return await this.orderService.createClient(data)
   }
 
-  @Post('criarPedido')
+  @Post('criar')
   async createOrder(@Body() data: OrdersDTO) {
     return await this.orderService.createOrder(data)
   }
