@@ -16,6 +16,7 @@ export class PaymentsRepository {
 	}
 
 	async validPayment(payment: paymentsDTO) {
+		console.log(payment)
 		const payments = this.paymentsRepository.create(payment)
 		return await this.paymentsRepository.save(payments)
 	}

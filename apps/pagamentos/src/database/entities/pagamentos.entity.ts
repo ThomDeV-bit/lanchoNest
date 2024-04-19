@@ -11,12 +11,14 @@ export class PaymentsEntity {
 	amount: number
 
 	@Column({ name: 'clientId', type: 'int' })
-	clienteId: number
+	clientId: number
 
 	@Column({ name: 'orderId', type: 'int' })
-	pedidoId: number
+	orderId: number
 
 	@Column({ name: 'status', type: 'enum', enum: PaymentStatus })
+	status: PaymentStatus
+
 
 	@CreateDateColumn({ name: 'createdAt', type: 'datetime' })
 	createdAt: Timestamp
