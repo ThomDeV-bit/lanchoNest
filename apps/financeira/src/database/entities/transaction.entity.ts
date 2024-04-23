@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { UserEntity } from "./user.entity";
 import { TransactionStatus } from "../../enum/enum";
 
@@ -17,6 +17,8 @@ export class TransactionEntity {
 	@Column({ name: 'status', type: 'enum', enum: TransactionStatus })
 	status: TransactionStatus
 
-	@ManyToMany(() => UserEntity, (financial) => financial.id)
+	@ManyToOne(() => UserEntity, (financial) => financial.id, {
+		cascade: ['update']
+	})
 	userId: UserEntity
 }
