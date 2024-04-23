@@ -24,7 +24,10 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+ - A little example of an application using microservices with kafka.
+ - The purpose of the application is learn mora about kafka and microservice,
+    improve my logical thinking to create more complex application flows.
+  - More tecnologies: [Docker, Typeorm]
 
 ## Installation
 
@@ -71,3 +74,5 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+
