@@ -15,7 +15,6 @@ export class PagamentosController {
 
   @EventPattern('order')
   async payment(@Payload() message) {
-    console.log(message)
     await this.paymentsService.validOrder({
       amount: message.orders.price,
       clientId: message.orders.clientId,
@@ -26,9 +25,8 @@ export class PagamentosController {
     })
   }
 
-  @EventPattern('transaction')
+  @MessagePattern('transaction')
   async validPayment(@Payload() message) {
-    console.log(message)
     await this.paymentsService.validPayments(message)
   }
 }
