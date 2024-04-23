@@ -26,8 +26,7 @@ export class OrdersService {
 
   async createOrder(order: OrdersDTO) {
     const orders = await this.pedidosRepository.criarPedido(order)
-    await lastValueFrom(this.kafkaService.emit('order', {orders}))
-    console.log(orders)
+    await lastValueFrom(this.kafkaService.emit('order', { orders }))
     return orders
   }
   async createClient(client: ClientDTO) {
