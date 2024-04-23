@@ -26,21 +26,26 @@ export class FinanceiraService {
   }
 
   async validPayment(message: any) {
-    const validUser: FinancialDTO = {
-      email: message.email,
-      name: message.name
+    try {
+      const validUser: FinancialDTO = {
+        email: message.payments.email,
+      }
+      const user = await this.userRepository.listby(validUser)
+      if (!user) return new BadRequestException('Usuario n consta na base de dados financeiros')
+      user.credit -= message.payments.amount
+      const transactionParams: TransactionDTO = {
+        idOrder: message.payments.id,
+        amount: message.payments.amount,
+        status: user.credit > message.payments.amount ? TransactionStatus.APROVED : TransactionStatus.REJECTED,
+        userId: user,
+      }
+      const transaction = await this.transactionRepository.create(transactionParams)
+      await lastValueFrom(this.kafkaService.emit('transaction', { transaction }))
+      return transaction
+    } catch (error) {
+      throw new BadRequestException(error)
     }
-    const user = await this.userRepository.listby(validUser)
-    if (!user) throw new BadRequestException('Usuario n consta na base de dados financeiros')
-    const transaction: TransactionDTO = {
-      idOrder: message.id,
-      amount: message.price,
-      status: user.credit < message.order.price ? TransactionStatus.APROVED : TransactionStatus.REJECTED,
-      userId: user
-    }
-    const transactionFinish = await this.transactionRepository.create(transaction)
-    await lastValueFrom(this.kafkaService.emit('transaction', { transactionFinish }))
-    return transactionFinish
+
   }
 }
 
