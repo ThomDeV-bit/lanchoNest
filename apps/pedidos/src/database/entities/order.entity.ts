@@ -31,6 +31,11 @@ export class OrdersEntity {
 	@Column({ name: 'status', type: 'enum', enum: OrderStatus })
 	status: OrderStatus
 
-	@ManyToOne(() => ClientEntity, (client) => client.orders)
+	@ManyToOne(() => ClientEntity, (client) => client.orders,
+		{
+			cascade: ['update']
+		}
+
+	)
 	clientId: ClientEntity
 }
