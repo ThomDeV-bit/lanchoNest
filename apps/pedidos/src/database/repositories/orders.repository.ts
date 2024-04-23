@@ -4,9 +4,7 @@ import { OrdersEntity } from "../entities/order.entity";
 import { Repository } from "typeorm";
 import { OrdersDTO } from "../../dto/order.dto";
 import { ClientDTO } from "../../dto/client.dto";
-import { NotFoundError, throwError } from "rxjs";
 import { ClientEntity } from "../entities/client.entity";
-import { emit } from "process";
 import { OrderStatus } from "../../enum/enum";
 
 @Injectable()
@@ -59,8 +57,15 @@ export class OrdersRepository {
 	}
 
 	async update(message: any) {
-		const query = this.orderRepository.createQueryBuilder()
-		query.update().set({ status: message.payments.status === 'APROVED' ? OrderStatus.PAYED : OrderStatus.CANCELLED })
-		return query.execute()
+		const query = await this.orderRepository.update(
+			{
+				id: message.paymentsUpdate.orderId
+			},
+			{
+				status: message.paymentsUpdate.status === 'APROVED' ? OrderStatus.PAYED : OrderStatus.CANCELLED
+			}
+		)
+
+		return query
 	}
 }

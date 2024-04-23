@@ -14,7 +14,7 @@ export class OrdersController {
     try {
       return await this.orderService.buscarPedidos();
     } catch (error) {
-      console.log(console.error(error))
+      console.log(error)
     }
   }
 
@@ -29,8 +29,9 @@ export class OrdersController {
     return await this.orderService.createOrder(data)
   }
 
-  @MessagePattern('payments')
+  @MessagePattern('valid_payments')
   async updateOrderStatus(@Payload() message) {
+    console.log(message, '*%%%%%%%%%%')
     await this.orderService.updateOrder(message)
   }
 
