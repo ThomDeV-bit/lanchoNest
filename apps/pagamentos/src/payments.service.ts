@@ -3,7 +3,6 @@ import { PaymentsRepository } from './database/reposiotry/payments.repository';
 import { paymentsDTO } from './dto/payment.dto';
 import { ClientKafka } from '@nestjs/microservices';
 import { lastValueFrom } from 'rxjs';
-import { PaymentStatus } from './enum/enum';
 
 @Injectable()
 export class PaymentsService {
@@ -11,7 +10,10 @@ export class PaymentsService {
     @Inject(PaymentsRepository)
     private readonly paymentsRepository: PaymentsRepository,
     @Inject('PAYMENTS_SERVICE')
-    private readonly kafkaService: ClientKafka
+    private readonly kafkaService: ClientKafka,
+    @Inject('PAYMENTS_VALIDATE_SERVICE')
+    private readonly kafkaValidatePaymentService: ClientKafka
+
   ) { }
   async list() {
     return await this.paymentsRepository.list();
@@ -29,12 +31,9 @@ export class PaymentsService {
   }
 
   async validPayments(validPayment: any) {
-    const status: PaymentStatus = validPayment.transaction.status == 'APROVED' ? PaymentStatus.APROVED : PaymentStatus.REJECTED
-    const payment = await this.paymentsRepository.updatePaymets(
-      validPayment.transaction.idOrder,
-      status
-    )
-    await lastValueFrom(this.kafkaService.emit('payments', { payment }))
-    return payment
+    const payments = await this.paymentsRepository.updatePaymets(validPayment)
+    const paymentsUpdate = await this.paymentsRepository.listBy(validPayment.transaction.idOrder)
+    await lastValueFrom(this.kafkaValidatePaymentService.emit('valid_payments', { paymentsUpdate }))
+    return payments
   }
 }

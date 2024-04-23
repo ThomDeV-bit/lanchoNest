@@ -19,20 +19,23 @@ export class PaymentsRepository {
 	async listBy(payment: number) {
 		return await this.paymentsRepository.findOne({
 			where: {
-				id: payment
+				orderId: payment
 			}
 		})
 	}
 
-	async updatePaymets(orderId: number, status: PaymentStatus) {
+	async updatePaymets(update: any) {
 		const query = this.paymentsRepository.createQueryBuilder()
-		query.update().set({ status: status })
-		query.where(`orderId = ${orderId}`)
+			.update()
+			.set({
+				status: update.transaction.status === 'APROVED' ? PaymentStatus.APROVED : PaymentStatus.REJECTED
+			})
+			.where(`orderId = ${update.transaction.idOrder} `)
+		console.log(await query.execute())
 		return await query.execute()
 	}
 
 	async validPayment(payment: paymentsDTO) {
-		console.log(payment)
 		const payments = this.paymentsRepository.create(payment)
 		return await this.paymentsRepository.save(payments)
 	}
