@@ -17,6 +17,16 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       }
     },
+    {
+      name: 'PAYMENTS_VALIDATE_SERVICE',
+      transport: Transport.KAFKA,
+      options: {
+        client: {
+          clientId: 'valid_payments',
+          brokers: ['broker:29092'],
+        },
+      }
+    },
   ])
   ],
   controllers: [PagamentosController],
