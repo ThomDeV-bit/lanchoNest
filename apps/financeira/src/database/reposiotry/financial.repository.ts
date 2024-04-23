@@ -22,7 +22,6 @@ export class UserRepository {
 		})
 	}
 	async create(finacial: FinancialDTO) {
-		console.log(finacial)
 		const financialRegister = this.userEntity.create(finacial)
 		return await this.userEntity.save(financialRegister)
 	}

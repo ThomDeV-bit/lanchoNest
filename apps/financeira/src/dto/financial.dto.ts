@@ -1,5 +1,5 @@
 export class FinancialDTO {
-	name: string
+	name?: string
 	email: string
 	credit?: number
 }

@@ -13,7 +13,7 @@ export class FinanceiraController {
 
   @MessagePattern('create_user')
   async create(@Payload() message) {
-    return await this.financeiraService.create({
+    await this.financeiraService.create({
       credit: 5000,
       email: message.client.email,
       name: message.client.name
@@ -22,6 +22,7 @@ export class FinanceiraController {
 
   @MessagePattern('payments')
   async validPayment(@Payload() message) {
-    return await this.financeiraService.validPayment(message)
+    console.log(message)
+    await this.financeiraService.validPayment(message)
   }
 }
