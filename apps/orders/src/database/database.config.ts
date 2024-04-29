@@ -12,9 +12,10 @@ export const database: DataSourceOptions = {
 	port: 3306,
 	username: 'root',
 	password: 'root123',
-	database: 'PEDIDOS',
+	database: 'orders',
 	entities: [OrdersEntity, ClientEntity],
-	migrations: [Migrations1713786840544, Migrations1713817154744, Migrations1713818047414]
+	migrations: [Migrations1713786840544, Migrations1713817154744, Migrations1713818047414],
+	synchronize: true
 }
 
 const databaseProvider = new DataSource(database)
