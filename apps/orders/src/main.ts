@@ -4,8 +4,11 @@ import { AppModule } from './modules/app.module';
 import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule.register());
+  const app = await NestFactory.create(AppModule.register(), {
+    cors: true
+  });
   databaseProvider.initialize().then(() => console.log('conectado ao banco de dados'))
+
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.KAFKA,
     options: {
