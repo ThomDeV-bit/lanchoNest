@@ -4,7 +4,7 @@ WORKDIR /home/node/app
 
 COPY . .
 
-RUN npm install --quiet --no-optional --no-found --loglevel=error
+RUN npm install npm build --quiet --no-optional --no-found --loglevel=error
 
 EXPOSE 3000
 EXPOSE 3001
